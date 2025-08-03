@@ -7,6 +7,8 @@ export default async function WithTimeFrame({params} : {
     const timeframe = (await params).timeframe
 
 return(
+    <>
     <APIRender symbol={ticker} timeframe={timeframe}/>
+    </>
 )
 }

@@ -1,17 +1,20 @@
-import APIRender from "./apiCalls"
+import ChartHeader from "@/app/components/stock/chartHeader";
+import APIRender from "./apiCalls";
+
 
 export default async function RouteShow({
-    params,
+  params,
 }: {
-    params: Promise<{ticker: string}>
-}){
-    const ticker = (await params).ticker
-    return(
-        <>
-       {
-            ticker?
-        <APIRender symbol={ticker?.toString()} /> : null
-}
-        </>
-    )
+  params: Promise<{ ticker: string }>;
+}) {
+  function ShowPageItems() {
+    return (
+      <>
+        <APIRender symbol={ticker} />
+      </>
+    );
+  }
+
+  const ticker = (await params).ticker;
+  return <>{ticker ? <ShowPageItems /> : null}</>;
 }

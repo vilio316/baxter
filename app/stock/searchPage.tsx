@@ -1,51 +1,72 @@
-'use client'
+"use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import ZeroMatch from "./zeroMatch";
+import data from "@/logos_array";
 
-const fmp_key = process.env.NEXT_PUBLIC_FMP_KEY
+export default function StockSearchPage() {
+  const [input_value, changeInput] = useState("");
+  const [results, setResults] = useState<any[]>([]);
 
-export default function StockSearchPage(){
-    const [input_value, changeInput] = useState('');
-    const [results, setResults] = useState<[]>([])
+  useEffect(() => {
+    function fromFMP(searchTerm: string) {
+      const string_response = Array(
+        data.filter(
+          (item) =>
+            item.Ticker.includes(searchTerm.toUpperCase()) ||
+            item.Name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+      setResults(string_response);
+      console.log(string_response);
+    }
+    if (input_value.length > 1) {
+      fromFMP(input_value);
+    }
+  }, [input_value]);
 
-    useEffect(()=> {
-      async function fromFMP(searchTerm: string){
-        const string_request = await fetch(`https://financialmodelingprep.com/api/v3/search?query=${searchTerm}&limit=20&exchange=NASDAQ&apikey=${fmp_key}`)
-        const string_response = await string_request.json()
-        setResults(string_response)
-      }
-      if(input_value.length % 3 == 0 && input_value.length > 1){
-        fromFMP(input_value)
-      }
-    }, [input_value])
+  return (
+    <div className="mx-auto w-11/12 p-4 md:p-6">
+      <input
+        type="text"
+        name="name_search"
+        id="nms"
+        placeholder="Enter Stock or Ticker Name Here"
+        className="border-2 rounded-[3.5rem] border-gray-300 outline-none p-3 md:p-5 my-3 md:my-5 w-full text-lg md:text-xl text-black placeholder-gray-400 focus:ring-2 focus:ring-[#53D22c] transition-all shadow-md"
+        onChange={(e) => changeInput(e.target.value)}
+        autoFocus
+      />
 
-    return(
-        <div className="mx-auto w-11/12 p-1 md:p-2">
-        <input type="text" name="name_search" id="nms" placeholder="Enter Stock or Ticker Name Here" className="border-0 outline-none rounded-[2rem] p-2 md:p-4 my-2 md:my-4 w-10/12 text-lg md:text-2xl text-black" onChange={(e)=> changeInput(e.target.value)} />
-        <div className="search_results">
-                {results.length > 0 ?
-                    results.filter((item : {stockExchange: string}) => item.stockExchange.includes('NASDAQ')).map((item: any) => (
-                        <div className="grid gap-x-2 grid-cols-12 md:gap-x-4 p-1 md:p-2 my-1 md:my-2 items-center" key={item.symbol}>
-                        <div className="col-span-1">
-                        <img src={`https://financialmodelingprep.com/image-stock/${item.symbol}.png`} alt={item.name} 
-                        className="h-[3.5rem] w-[3.5rem] rounded-full object-cover" loading="lazy"/>
-                        </div>
+      <div className="search_results">
+        {results[0] && results[0].length > 0 ? (
+          results[0].map((item: any) => (
+            <div
+              className="grid grid-cols-12 gap-4 md:gap-6 p-3 md:p-6 my-4 md:my-6 items-center bg-[#1F2328] border-b border-gray-700 hover:bg-[#1d3f13] rounded-lg transition-all shadow-lg transform hover:scale-105"
+              key={item.Ticker}
+            >
+              <div className="col-span-3 sm:col-span-2 md:col-span-1 w-[50px] h-[50px] overflow-hidden rounded-full">
+                <img
+                  src={`https://cdn.brandfetch.io/${item.url}/w/400/h/400?c=1idERn_mT3M_sg0-LYT`}
+                  alt={item.Ticker}
+                  className="object-cover w-full h-full"
+                  loading="lazy"
+                />
+              </div>
 
-                        <Link href={`/stock/${item.symbol}`} className="block underline text-xl md:text-2xl col-span-9" key={item.symbol}>
-                            {item.name}
-                            </Link>
-                        <div className="col-span-2">
-                            <p className="font-bold text-lg md:text-xl">{item.symbol}</p>
-                            <p>{item.stockExchange}</p>
-                        </div>    
-                        </div>
-                    )): 
-                      input_value.length > 3?
-                      <ZeroMatch/>: null
-                }
-        </div>
-        </div>
-    )
+              <Link
+                href={`/stock/${item.Ticker}`}
+                className="col-span-9 sm:col-span-10 text-lg md:text-xl font-medium text-white hover:text-[#53D22c] transition-all"
+              >
+                <p className="font-bold text-xl text-white">{item.Ticker}</p>
+                <p className="underline text-[#53D22c]">{item.Name}</p>
+              </Link>
+            </div>
+          ))
+        ) : input_value.length > 3 ? (
+          <ZeroMatch />
+        ) : null}
+      </div>
+    </div>
+  );
 }

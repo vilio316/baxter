@@ -4,13 +4,18 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121712;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #121712;
     --foreground: #ededed;
+  --primary: #1E3A8A;
+  --accent: #3B82F6;
+  --profit: #10B981;
+  --alert: #EF4444;
+  --bg-light: #F3F4F6;
   }
 }
 
@@ -20,36 +25,49 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.head_p{
+.stock_facts > p{
+margin: 0.5rem 0;
+}
+
+.head_p {
   font-size: 1.75rem;
   font-weight: bold;
   margin: 0.75rem 0;
 }
 
-.side_p{
+.side_p {
   font-size: 1.75rem;
   text-indent: 1rem;
 }
 
-footer a{
-  display: block
+footer a {
+  display: block;
 }
 
-.link-topic{
+.link-topic {
   font-size: 1.75rem;
   font-weight: bold;
 }
-footer div > a{
+
+footer div > a {
   font-size: 1.25rem;
 }
 
-footer p{
+footer p {
   font-size: 1.75rem;
   margin: 0.5rem 0;
 }
 
-@media screen and (max-width: 768px){
-  html{
+/* @media screen and (max-width: 768px) {
+  html {
     font-size: 12px;
   }
 }
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 2px solid white;
+}
+  */
