@@ -1,3 +1,4 @@
+import ChartHeader from "@/app/components/stock/chartHeader";
 import { companyNews } from "../../apiLoaders";
 import NewsItem from '@/app/components/NewsItem';
 
@@ -16,6 +17,7 @@ export default async function NewsPage({
 
     return(
         <>
+        <ChartHeader ticker={ticker} timeframe={1}/>
         {filteredNewsReports.length > 0 ?
     <div className="company_news_data grid col-span-1">
         <div>

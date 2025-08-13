@@ -7,6 +7,21 @@
     "url": "alpineace.com"
   },
   {
+    "Ticker": "FIG",
+    "Name": "Figma Inc.",
+    "Website": "https://figma.com",
+    "Sector": "Technology",
+    "url": "figma.com"
+  },
+  {
+    "Ticker": "RDDT",
+    "Name": "Reddit Inc.",
+    "Website": "https://reddit.com",
+    "Sector": "Technology, Social Media",
+    "url": "reddit.com"
+
+  },
+  {
     "Ticker": "AACBR",
     "Name": "Artius II Acquisition Inc. Rights",
     "Website": "https://www.alpineace.com",

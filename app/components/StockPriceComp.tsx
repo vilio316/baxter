@@ -24,6 +24,7 @@ export default async function StockPriceComp(props: {
   const sixMonthChange = usable["6M"];
 
   let change;
+  
   if (props.timeframe && props.timeframe == 30) {
     change = monthChange;
   } else if (props.timeframe && props.timeframe == 365) {
@@ -35,7 +36,6 @@ export default async function StockPriceComp(props: {
   } else {
     change = oneChange;
   }
-
   const { c } = price_report;
   const { currency, ticker, name, exchange } = symb_result;
 

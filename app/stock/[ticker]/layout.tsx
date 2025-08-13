@@ -22,7 +22,6 @@ export default async function HouseLayout({
   return (
     <div className={`p-1 md:p-2 mx-1 md:mx-2`}>
       <div className="grid">
-        <ChartHeader ticker={ticker} timeframe={1} />
         {children}</div>
     </div>
   );

@@ -1,3 +1,4 @@
+import ChartHeader from "@/app/components/stock/chartHeader";
 import { analyst_ratings } from "../../apiLoaders";
 
 type analyst_rating = {
@@ -31,12 +32,13 @@ export default async function Analytics({
         answer = y;
       }
     }
-    //console.log(answer)
     return answer;
   }
   findMatch();
   return (
+    
     <div className="grid p-4 my-2 text-white rounded-lg  max-w-3xl mx-auto">
+      <ChartHeader timeframe={1} ticker={ticker} />
       <p className="text-2xl font-semibold text-gray-200 underline my-4">
         Analytics for <span className="font-bold uppercase">{ticker}</span>
       </p>
